@@ -1,12 +1,21 @@
 package com.example.mealrecipies
 
 import android.os.Bundle
+import android.util.Log
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.example.mealrecipies.api.ApiService
+import com.example.mealrecipies.models.Meal
+import com.example.mealrecipies.models.MealApiResponse
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,5 +31,33 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications))
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+
+        val retrofit = Retrofit.Builder()
+            .baseUrl(resources.getString(R.string.BASE_URL))
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        val apiService = retrofit.create(ApiService::class.java)
+
+        val call : Call<Meal> = apiService.getMealsById("52772")
+
+        call.enqueue(object: Callback<Meal>{
+            override fun onResponse(call: Call<Meal>, response: Response<Meal>) {
+                val meal = response.body()
+
+                Log.i("TAG", meal?.strArea.toString())
+            }
+
+            override fun onFailure(call: Call<Meal>, t: Throwable) {
+                TODO("Not yet implemented")
+            }
+
+        })
+    }
+
+
+    companion object{
+
     }
 }

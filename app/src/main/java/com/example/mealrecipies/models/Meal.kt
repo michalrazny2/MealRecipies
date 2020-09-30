@@ -2,275 +2,215 @@ package com.example.mealrecipies.models
 
 import android.os.Parcel
 import android.os.Parcelable
-import com.fasterxml.jackson.annotation.JsonAnyGetter
-import com.fasterxml.jackson.annotation.JsonAnySetter
-import com.fasterxml.jackson.annotation.JsonIgnore
-import com.fasterxml.jackson.annotation.JsonInclude
-import com.fasterxml.jackson.annotation.JsonProperty
-import com.fasterxml.jackson.annotation.JsonPropertyOrder
-import java.util.*
+import androidx.room.Entity
+import com.google.gson.annotations.Expose
+import com.google.gson.annotations.SerializedName
 
-
-@JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder("idMeal", "strMeal", "strDrinkAlternate", "strCategory", "strArea", "strInstructions", "strMealThumb", "strTags", "strYoutube", "strIngredient1", "strIngredient2", "strIngredient3", "strIngredient4", "strIngredient5", "strIngredient6", "strIngredient7", "strIngredient8", "strIngredient9", "strIngredient10", "strIngredient11", "strIngredient12", "strIngredient13", "strIngredient14", "strIngredient15", "strIngredient16", "strIngredient17", "strIngredient18", "strIngredient19", "strIngredient20", "strMeasure1", "strMeasure2", "strMeasure3", "strMeasure4", "strMeasure5", "strMeasure6", "strMeasure7", "strMeasure8", "strMeasure9", "strMeasure10", "strMeasure11", "strMeasure12", "strMeasure13", "strMeasure14", "strMeasure15", "strMeasure16", "strMeasure17", "strMeasure18", "strMeasure19", "strMeasure20", "strSource", "dateModified")
+//@Entity
 class Meal : Parcelable {
-    @get:JsonProperty("idMeal")
-    @set:JsonProperty("idMeal")
-    @JsonProperty("idMeal")
+    @SerializedName("idMeal")
+    @Expose
     var idMeal: String? = null
 
-    @get:JsonProperty("strMeal")
-    @set:JsonProperty("strMeal")
-    @JsonProperty("strMeal")
+    @SerializedName("strMeal")
+    @Expose
     var strMeal: String? = null
 
-    @get:JsonProperty("strDrinkAlternate")
-    @set:JsonProperty("strDrinkAlternate")
-    @JsonProperty("strDrinkAlternate")
+    @SerializedName("strDrinkAlternate")
+    @Expose
     var strDrinkAlternate: Any? = null
 
-    @get:JsonProperty("strCategory")
-    @set:JsonProperty("strCategory")
-    @JsonProperty("strCategory")
+    @SerializedName("strCategory")
+    @Expose
     var strCategory: String? = null
 
-    @get:JsonProperty("strArea")
-    @set:JsonProperty("strArea")
-    @JsonProperty("strArea")
+    @SerializedName("strArea")
+    @Expose
     var strArea: String? = null
 
-    @get:JsonProperty("strInstructions")
-    @set:JsonProperty("strInstructions")
-    @JsonProperty("strInstructions")
+    @SerializedName("strInstructions")
+    @Expose
     var strInstructions: String? = null
 
-    @get:JsonProperty("strMealThumb")
-    @set:JsonProperty("strMealThumb")
-    @JsonProperty("strMealThumb")
+    @SerializedName("strMealThumb")
+    @Expose
     var strMealThumb: String? = null
 
-    @get:JsonProperty("strTags")
-    @set:JsonProperty("strTags")
-    @JsonProperty("strTags")
+    @SerializedName("strTags")
+    @Expose
     var strTags: String? = null
 
-    @get:JsonProperty("strYoutube")
-    @set:JsonProperty("strYoutube")
-    @JsonProperty("strYoutube")
+    @SerializedName("strYoutube")
+    @Expose
     var strYoutube: String? = null
 
-    @get:JsonProperty("strIngredient1")
-    @set:JsonProperty("strIngredient1")
-    @JsonProperty("strIngredient1")
+    @SerializedName("strIngredient1")
+    @Expose
     var strIngredient1: String? = null
 
-    @get:JsonProperty("strIngredient2")
-    @set:JsonProperty("strIngredient2")
-    @JsonProperty("strIngredient2")
+    @SerializedName("strIngredient2")
+    @Expose
     var strIngredient2: String? = null
 
-    @get:JsonProperty("strIngredient3")
-    @set:JsonProperty("strIngredient3")
-    @JsonProperty("strIngredient3")
+    @SerializedName("strIngredient3")
+    @Expose
     var strIngredient3: String? = null
 
-    @get:JsonProperty("strIngredient4")
-    @set:JsonProperty("strIngredient4")
-    @JsonProperty("strIngredient4")
+    @SerializedName("strIngredient4")
+    @Expose
     var strIngredient4: String? = null
 
-    @get:JsonProperty("strIngredient5")
-    @set:JsonProperty("strIngredient5")
-    @JsonProperty("strIngredient5")
+    @SerializedName("strIngredient5")
+    @Expose
     var strIngredient5: String? = null
 
-    @get:JsonProperty("strIngredient6")
-    @set:JsonProperty("strIngredient6")
-    @JsonProperty("strIngredient6")
+    @SerializedName("strIngredient6")
+    @Expose
     var strIngredient6: String? = null
 
-    @get:JsonProperty("strIngredient7")
-    @set:JsonProperty("strIngredient7")
-    @JsonProperty("strIngredient7")
+    @SerializedName("strIngredient7")
+    @Expose
     var strIngredient7: String? = null
 
-    @get:JsonProperty("strIngredient8")
-    @set:JsonProperty("strIngredient8")
-    @JsonProperty("strIngredient8")
+    @SerializedName("strIngredient8")
+    @Expose
     var strIngredient8: String? = null
 
-    @get:JsonProperty("strIngredient9")
-    @set:JsonProperty("strIngredient9")
-    @JsonProperty("strIngredient9")
+    @SerializedName("strIngredient9")
+    @Expose
     var strIngredient9: String? = null
 
-    @get:JsonProperty("strIngredient10")
-    @set:JsonProperty("strIngredient10")
-    @JsonProperty("strIngredient10")
+    @SerializedName("strIngredient10")
+    @Expose
     var strIngredient10: String? = null
 
-    @get:JsonProperty("strIngredient11")
-    @set:JsonProperty("strIngredient11")
-    @JsonProperty("strIngredient11")
+    @SerializedName("strIngredient11")
+    @Expose
     var strIngredient11: String? = null
 
-    @get:JsonProperty("strIngredient12")
-    @set:JsonProperty("strIngredient12")
-    @JsonProperty("strIngredient12")
+    @SerializedName("strIngredient12")
+    @Expose
     var strIngredient12: String? = null
 
-    @get:JsonProperty("strIngredient13")
-    @set:JsonProperty("strIngredient13")
-    @JsonProperty("strIngredient13")
+    @SerializedName("strIngredient13")
+    @Expose
     var strIngredient13: String? = null
 
-    @get:JsonProperty("strIngredient14")
-    @set:JsonProperty("strIngredient14")
-    @JsonProperty("strIngredient14")
+    @SerializedName("strIngredient14")
+    @Expose
     var strIngredient14: String? = null
 
-    @get:JsonProperty("strIngredient15")
-    @set:JsonProperty("strIngredient15")
-    @JsonProperty("strIngredient15")
+    @SerializedName("strIngredient15")
+    @Expose
     var strIngredient15: String? = null
 
-    @get:JsonProperty("strIngredient16")
-    @set:JsonProperty("strIngredient16")
-    @JsonProperty("strIngredient16")
+    @SerializedName("strIngredient16")
+    @Expose
     var strIngredient16: Any? = null
 
-    @get:JsonProperty("strIngredient17")
-    @set:JsonProperty("strIngredient17")
-    @JsonProperty("strIngredient17")
+    @SerializedName("strIngredient17")
+    @Expose
     var strIngredient17: Any? = null
 
-    @get:JsonProperty("strIngredient18")
-    @set:JsonProperty("strIngredient18")
-    @JsonProperty("strIngredient18")
+    @SerializedName("strIngredient18")
+    @Expose
     var strIngredient18: Any? = null
 
-    @get:JsonProperty("strIngredient19")
-    @set:JsonProperty("strIngredient19")
-    @JsonProperty("strIngredient19")
+    @SerializedName("strIngredient19")
+    @Expose
     var strIngredient19: Any? = null
 
-    @get:JsonProperty("strIngredient20")
-    @set:JsonProperty("strIngredient20")
-    @JsonProperty("strIngredient20")
+    @SerializedName("strIngredient20")
+    @Expose
     var strIngredient20: Any? = null
 
-    @get:JsonProperty("strMeasure1")
-    @set:JsonProperty("strMeasure1")
-    @JsonProperty("strMeasure1")
+    @SerializedName("strMeasure1")
+    @Expose
     var strMeasure1: String? = null
 
-    @get:JsonProperty("strMeasure2")
-    @set:JsonProperty("strMeasure2")
-    @JsonProperty("strMeasure2")
+    @SerializedName("strMeasure2")
+    @Expose
     var strMeasure2: String? = null
 
-    @get:JsonProperty("strMeasure3")
-    @set:JsonProperty("strMeasure3")
-    @JsonProperty("strMeasure3")
+    @SerializedName("strMeasure3")
+    @Expose
     var strMeasure3: String? = null
 
-    @get:JsonProperty("strMeasure4")
-    @set:JsonProperty("strMeasure4")
-    @JsonProperty("strMeasure4")
+    @SerializedName("strMeasure4")
+    @Expose
     var strMeasure4: String? = null
 
-    @get:JsonProperty("strMeasure5")
-    @set:JsonProperty("strMeasure5")
-    @JsonProperty("strMeasure5")
+    @SerializedName("strMeasure5")
+    @Expose
     var strMeasure5: String? = null
 
-    @get:JsonProperty("strMeasure6")
-    @set:JsonProperty("strMeasure6")
-    @JsonProperty("strMeasure6")
+    @SerializedName("strMeasure6")
+    @Expose
     var strMeasure6: String? = null
 
-    @get:JsonProperty("strMeasure7")
-    @set:JsonProperty("strMeasure7")
-    @JsonProperty("strMeasure7")
+    @SerializedName("strMeasure7")
+    @Expose
     var strMeasure7: String? = null
 
-    @get:JsonProperty("strMeasure8")
-    @set:JsonProperty("strMeasure8")
-    @JsonProperty("strMeasure8")
+    @SerializedName("strMeasure8")
+    @Expose
     var strMeasure8: String? = null
 
-    @get:JsonProperty("strMeasure9")
-    @set:JsonProperty("strMeasure9")
-    @JsonProperty("strMeasure9")
+    @SerializedName("strMeasure9")
+    @Expose
     var strMeasure9: String? = null
 
-    @get:JsonProperty("strMeasure10")
-    @set:JsonProperty("strMeasure10")
-    @JsonProperty("strMeasure10")
+    @SerializedName("strMeasure10")
+    @Expose
     var strMeasure10: String? = null
 
-    @get:JsonProperty("strMeasure11")
-    @set:JsonProperty("strMeasure11")
-    @JsonProperty("strMeasure11")
+    @SerializedName("strMeasure11")
+    @Expose
     var strMeasure11: String? = null
 
-    @get:JsonProperty("strMeasure12")
-    @set:JsonProperty("strMeasure12")
-    @JsonProperty("strMeasure12")
+    @SerializedName("strMeasure12")
+    @Expose
     var strMeasure12: String? = null
 
-    @get:JsonProperty("strMeasure13")
-    @set:JsonProperty("strMeasure13")
-    @JsonProperty("strMeasure13")
+    @SerializedName("strMeasure13")
+    @Expose
     var strMeasure13: String? = null
 
-    @get:JsonProperty("strMeasure14")
-    @set:JsonProperty("strMeasure14")
-    @JsonProperty("strMeasure14")
+    @SerializedName("strMeasure14")
+    @Expose
     var strMeasure14: String? = null
 
-    @get:JsonProperty("strMeasure15")
-    @set:JsonProperty("strMeasure15")
-    @JsonProperty("strMeasure15")
+    @SerializedName("strMeasure15")
+    @Expose
     var strMeasure15: String? = null
 
-    @get:JsonProperty("strMeasure16")
-    @set:JsonProperty("strMeasure16")
-    @JsonProperty("strMeasure16")
+    @SerializedName("strMeasure16")
+    @Expose
     var strMeasure16: Any? = null
 
-    @get:JsonProperty("strMeasure17")
-    @set:JsonProperty("strMeasure17")
-    @JsonProperty("strMeasure17")
+    @SerializedName("strMeasure17")
+    @Expose
     var strMeasure17: Any? = null
 
-    @get:JsonProperty("strMeasure18")
-    @set:JsonProperty("strMeasure18")
-    @JsonProperty("strMeasure18")
+    @SerializedName("strMeasure18")
+    @Expose
     var strMeasure18: Any? = null
 
-    @get:JsonProperty("strMeasure19")
-    @set:JsonProperty("strMeasure19")
-    @JsonProperty("strMeasure19")
+    @SerializedName("strMeasure19")
+    @Expose
     var strMeasure19: Any? = null
 
-    @get:JsonProperty("strMeasure20")
-    @set:JsonProperty("strMeasure20")
-    @JsonProperty("strMeasure20")
+    @SerializedName("strMeasure20")
+    @Expose
     var strMeasure20: Any? = null
 
-    @get:JsonProperty("strSource")
-    @set:JsonProperty("strSource")
-    @JsonProperty("strSource")
+    @SerializedName("strSource")
+    @Expose
     var strSource: Any? = null
 
-    @get:JsonProperty("dateModified")
-    @set:JsonProperty("dateModified")
-    @JsonProperty("dateModified")
+    @SerializedName("dateModified")
+    @Expose
     var dateModified: Any? = null
-
-    @JsonIgnore
-    private var additionalProperties: MutableMap<String, Any>? = HashMap()
 
     protected constructor(`in`: Parcel) {
         idMeal = `in`.readValue(String::class.java.classLoader) as String?
@@ -324,21 +264,9 @@ class Meal : Parcelable {
         strMeasure20 = `in`.readValue(Any::class.java.classLoader)
         strSource = `in`.readValue(Any::class.java.classLoader)
         dateModified = `in`.readValue(Any::class.java.classLoader)
-        additionalProperties =
-            `in`.readValue(MutableMap::class.java.classLoader) as MutableMap<String, Any>?
     }
 
     constructor() {}
-
-    @JsonAnyGetter
-    fun getAdditionalProperties(): Map<String, Any>? {
-        return additionalProperties
-    }
-
-    @JsonAnySetter
-    fun setAdditionalProperty(name: String, value: Any) {
-        additionalProperties!![name] = value
-    }
 
     override fun writeToParcel(dest: Parcel, flags: Int) {
         dest.writeValue(idMeal)
@@ -392,22 +320,21 @@ class Meal : Parcelable {
         dest.writeValue(strMeasure20)
         dest.writeValue(strSource)
         dest.writeValue(dateModified)
-        dest.writeValue(additionalProperties)
     }
 
     override fun describeContents(): Int {
         return 0
     }
 
-//    companion object {
-//        val CREATOR: Parcelable.Creator<Meal> = object : Parcelable.Creator<Meal?> {
-//            override fun createFromParcel(`in`: Parcel): Meal? {
-//                return Meal(`in`)
-//            }
-//
-//            override fun newArray(size: Int): Array<Meal?> {
-//                return arrayOfNulls(size)
-//            }
-//        }
-//    }
+    companion object {
+        val CREATOR: Parcelable.Creator<Meal?> = object : Parcelable.Creator<Meal?> {
+            override fun createFromParcel(`in`: Parcel): Meal? {
+                return Meal(`in`)
+            }
+
+            override fun newArray(size: Int): Array<Meal?> {
+                return arrayOfNulls(size)
+            }
+        }
+    }
 }
