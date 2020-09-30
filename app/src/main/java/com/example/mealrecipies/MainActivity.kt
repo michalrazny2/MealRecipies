@@ -33,7 +33,11 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications))
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-        
+
+        val db = AppDatabase.getAppDataBase(context = this)
+        val mealDao = db?.mealDao()
+        var meal1 = Meal()
+
         val retrofit = Retrofit.Builder()
             .baseUrl(resources.getString(R.string.BASE_URL))
             .addConverterFactory(GsonConverterFactory.create())

@@ -2,6 +2,7 @@ package com.example.mealrecipies.models
 
 import android.os.Parcel
 import android.os.Parcelable
+import androidx.annotation.NonNull
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -11,6 +12,7 @@ import com.google.gson.annotations.SerializedName
 @Entity(tableName = "meals")
 class Meal : Parcelable {
     @PrimaryKey
+    @NonNull
     @SerializedName("idMeal")
     @Expose
     var idMeal: String? = null
@@ -23,7 +25,7 @@ class Meal : Parcelable {
     @ColumnInfo(name="strDrinkAlternate")
     @SerializedName("strDrinkAlternate")
     @Expose
-    var strDrinkAlternate: Any? = null
+    var strDrinkAlternate: String? = null
 
     @ColumnInfo(name="strCategory")
     @SerializedName("strCategory")
@@ -133,27 +135,27 @@ class Meal : Parcelable {
     @ColumnInfo(name="strIngredient16")
     @SerializedName("strIngredient16")
     @Expose
-    var strIngredient16: Any? = null
+    var strIngredient16: String? = null
 
     @ColumnInfo(name="strIngredient17")
     @SerializedName("strIngredient17")
     @Expose
-    var strIngredient17: Any? = null
+    var strIngredient17: String? = null
 
     @ColumnInfo(name="strIngredient18")
     @SerializedName("strIngredient18")
     @Expose
-    var strIngredient18: Any? = null
+    var strIngredient18: String? = null
 
     @ColumnInfo(name="strIngredient19")
     @SerializedName("strIngredient19")
     @Expose
-    var strIngredient19: Any? = null
+    var strIngredient19: String? = null
 
     @ColumnInfo(name="strIngredient20")
     @SerializedName("strIngredient20")
     @Expose
-    var strIngredient20: Any? = null
+    var strIngredient20: String? = null
 
     @ColumnInfo(name="strMeasure1")
     @SerializedName("strMeasure1")
@@ -233,42 +235,42 @@ class Meal : Parcelable {
     @ColumnInfo(name="strMeasure16")
     @SerializedName("strMeasure16")
     @Expose
-    var strMeasure16: Any? = null
+    var strMeasure16: String? = null
 
     @ColumnInfo(name="strMeasure17")
     @SerializedName("strMeasure17")
     @Expose
-    var strMeasure17: Any? = null
+    var strMeasure17: String? = null
 
     @ColumnInfo(name="strMeasure18")
     @SerializedName("strMeasure18")
     @Expose
-    var strMeasure18: Any? = null
+    var strMeasure18: String? = null
 
     @ColumnInfo(name="strMeasure19")
     @SerializedName("strMeasure19")
     @Expose
-    var strMeasure19: Any? = null
+    var strMeasure19: String? = null
 
     @ColumnInfo(name="strMeasure20")
     @SerializedName("strMeasure20")
     @Expose
-    var strMeasure20: Any? = null
+    var strMeasure20: String? = null
 
     @ColumnInfo(name="strSource")
     @SerializedName("strSource")
     @Expose
-    var strSource: Any? = null
+    var strSource: String? = null
 
     @ColumnInfo(name="dateModified")
     @SerializedName("dateModified")
     @Expose
-    var dateModified: Any? = null
+    var dateModified: String? = null
 
     protected constructor(`in`: Parcel) {
         idMeal = `in`.readValue(String::class.java.classLoader) as String?
         strMeal = `in`.readValue(String::class.java.classLoader) as String?
-        strDrinkAlternate = `in`.readValue(Any::class.java.classLoader)
+        strDrinkAlternate = `in`.readValue(String::class.java.classLoader) as String?
         strCategory = `in`.readValue(String::class.java.classLoader) as String?
         strArea = `in`.readValue(String::class.java.classLoader) as String?
         strInstructions = `in`.readValue(String::class.java.classLoader) as String?
@@ -290,11 +292,11 @@ class Meal : Parcelable {
         strIngredient13 = `in`.readValue(String::class.java.classLoader) as String?
         strIngredient14 = `in`.readValue(String::class.java.classLoader) as String?
         strIngredient15 = `in`.readValue(String::class.java.classLoader) as String?
-        strIngredient16 = `in`.readValue(Any::class.java.classLoader)
-        strIngredient17 = `in`.readValue(Any::class.java.classLoader)
-        strIngredient18 = `in`.readValue(Any::class.java.classLoader)
-        strIngredient19 = `in`.readValue(Any::class.java.classLoader)
-        strIngredient20 = `in`.readValue(Any::class.java.classLoader)
+        strIngredient16 = `in`.readValue(String::class.java.classLoader) as String?
+        strIngredient17 = `in`.readValue(String::class.java.classLoader) as String?
+        strIngredient18 = `in`.readValue(String::class.java.classLoader) as String?
+        strIngredient19 = `in`.readValue(String::class.java.classLoader) as String?
+        strIngredient20 = `in`.readValue(String::class.java.classLoader) as String?
         strMeasure1 = `in`.readValue(String::class.java.classLoader) as String?
         strMeasure2 = `in`.readValue(String::class.java.classLoader) as String?
         strMeasure3 = `in`.readValue(String::class.java.classLoader) as String?
@@ -310,13 +312,13 @@ class Meal : Parcelable {
         strMeasure13 = `in`.readValue(String::class.java.classLoader) as String?
         strMeasure14 = `in`.readValue(String::class.java.classLoader) as String?
         strMeasure15 = `in`.readValue(String::class.java.classLoader) as String?
-        strMeasure16 = `in`.readValue(Any::class.java.classLoader)
-        strMeasure17 = `in`.readValue(Any::class.java.classLoader)
-        strMeasure18 = `in`.readValue(Any::class.java.classLoader)
-        strMeasure19 = `in`.readValue(Any::class.java.classLoader)
-        strMeasure20 = `in`.readValue(Any::class.java.classLoader)
-        strSource = `in`.readValue(Any::class.java.classLoader)
-        dateModified = `in`.readValue(Any::class.java.classLoader)
+        strMeasure16 = `in`.readValue(String::class.java.classLoader) as String?
+        strMeasure17 = `in`.readValue(String::class.java.classLoader) as String?
+        strMeasure18 = `in`.readValue(String::class.java.classLoader) as String?
+        strMeasure19 = `in`.readValue(String::class.java.classLoader) as String?
+        strMeasure20 = `in`.readValue(String::class.java.classLoader) as String?
+        strSource = `in`.readValue(String::class.java.classLoader) as String?
+        dateModified = `in`.readValue(String::class.java.classLoader) as String?
     }
 
     constructor() {}
