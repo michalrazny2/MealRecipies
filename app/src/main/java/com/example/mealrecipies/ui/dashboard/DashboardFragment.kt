@@ -8,7 +8,9 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mealrecipies.R
+import com.example.mealrecipies.adapter.MealRecyclerViewAdapter
 import com.example.mealrecipies.api.ApiService
 import com.example.mealrecipies.models.MealApiResponse
 import com.jakewharton.rxbinding4.view.clicks
@@ -30,7 +32,21 @@ class DashboardFragment : Fragment() {
         dashboardViewModel =
                 ViewModelProviders.of(this).get(DashboardViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_dashboard, container, false)
-
         return root
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        setUpRecyclerView()
+    }
+
+    override fun onStop() {
+        super.onStop()
+    }
+
+    private fun setUpRecyclerView() {
+        recyclerViewSearch.layoutManager = LinearLayoutManager(context)
+        recyclerViewSearch.adapter = MealRecyclerViewAdapter(dashboardViewModel.mealList)
     }
 }

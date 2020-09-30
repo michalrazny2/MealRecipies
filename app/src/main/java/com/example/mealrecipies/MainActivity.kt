@@ -8,7 +8,9 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import androidx.room.Room
 import com.example.mealrecipies.api.ApiService
+import com.example.mealrecipies.database.AppDatabase
 import com.example.mealrecipies.models.Meal
 import com.example.mealrecipies.models.MealApiResponse
 import retrofit2.Call
@@ -31,8 +33,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications))
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-
-
+        
         val retrofit = Retrofit.Builder()
             .baseUrl(resources.getString(R.string.BASE_URL))
             .addConverterFactory(GsonConverterFactory.create())
