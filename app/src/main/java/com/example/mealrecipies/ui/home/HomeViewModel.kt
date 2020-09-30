@@ -16,8 +16,8 @@ class HomeViewModel : BaseViewModel() {
     // todo: mealList to be changed on LiveData
     val localMealList: ArrayList<Meal> = arrayListOf(
         Meal(), //naive data
-        Meal(),
-        Meal(),
+        Meal("1", "Italia", "Vege"),
+        Meal("2", "Italia", "Meat"),
         Meal()
     )
 }

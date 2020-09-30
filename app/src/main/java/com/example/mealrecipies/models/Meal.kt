@@ -323,6 +323,12 @@ class Meal : Parcelable {
 
     constructor() {}
 
+    constructor(id: String, area: String, category: String) {
+        this.idMeal = id
+        this.strArea = area
+        this.strCategory = category
+    }
+
     override fun writeToParcel(dest: Parcel, flags: Int) {
         dest.writeValue(idMeal)
         dest.writeValue(strMeal)
