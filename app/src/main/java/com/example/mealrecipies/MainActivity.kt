@@ -36,7 +36,8 @@ class MainActivity : AppCompatActivity() {
 
         val db = AppDatabase.getAppDataBase(context = this)
         val mealDao = db?.mealDao()
-        var meal1 = Meal()
+        var meal1 = Meal() // todo: contructor wtf!
+//        mealDao?.saveMeal(meal1)
 
         val retrofit = Retrofit.Builder()
             .baseUrl(resources.getString(R.string.BASE_URL))
