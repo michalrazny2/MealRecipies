@@ -36,11 +36,15 @@ class MainActivity : AppCompatActivity() {
 
         val db = AppDatabase.getAppDataBase(context = this)
         val mealDao = db?.mealDao()
-        val meal1 = Meal("1", "Italia", "Vege")
-        val meal2 = Meal("2", "Italia", "Meat")
 
-        mealDao?.saveMeal(meal1)
-        mealDao?.saveMeal(meal2)
+        Thread{
+            val meal1 = Meal("1", "Italia", "Vege")
+            val meal2 = Meal("2", "Italia", "Meat")
+
+            mealDao?.saveMeal(meal1)
+            mealDao?.saveMeal(meal2)
+        }.start()
+
 
         val retrofit = Retrofit.Builder()
             .baseUrl(resources.getString(R.string.BASE_URL))

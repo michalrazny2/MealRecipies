@@ -4,11 +4,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent"
-    android:layout_width="wrap_content">
+    android:layout_width="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="@+id/meal_name_view"
         app:layout_constraintTop_toBottomOf="@+id/meal_name_view">
 
@@ -31,8 +31,8 @@
 
         <TextView
             android:id="@+id/meal_name_view"
-            android:layout_width="300dp"
-            android:layout_height="0dp"
+            android:layout_width="279dp"
+            android:layout_height="48dp"
             app:layout_constraintBottom_toTopOf="@+id/area_name_view"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

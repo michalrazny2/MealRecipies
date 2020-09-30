@@ -16,6 +16,7 @@ import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : Fragment() {
 
+    private lateinit var mealAdapter : MealRecyclerViewAdapter
     private lateinit var homeViewModel: HomeViewModel
 
     override fun onCreateView(
@@ -24,7 +25,10 @@ class HomeFragment : Fragment() {
             savedInstanceState: Bundle?
     ): View? {
         homeViewModel =
-                ViewModelProviders.of(this).get(HomeViewModel::class.java)
+            ViewModelProviders.of(this).get(HomeViewModel::class.java)
+
+        mealAdapter = MealRecyclerViewAdapter(homeViewModel.localMealList)
+
         val root = inflater.inflate(R.layout.fragment_home, container, false)
         return root
     }
@@ -41,6 +45,6 @@ class HomeFragment : Fragment() {
 
     private fun setUpRecyclerView() {
         recyclerViewLocal.layoutManager = LinearLayoutManager(context)
-        recyclerViewLocal.adapter = MealRecyclerViewAdapter(homeViewModel.localMealList)
+        recyclerViewLocal.adapter = mealAdapter
     }
 }

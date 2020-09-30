@@ -5,12 +5,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.mealrecipies.R
 import com.example.mealrecipies.models.Meal
 
-class MealRecyclerViewAdapter(private val mMealList: ArrayList<Meal>) : RecyclerView.Adapter<MealRecyclerViewAdapter.ViewHolder>() {
+class MealRecyclerViewAdapter(private val mMealList: LiveData<List<Meal>>) : RecyclerView.Adapter<MealRecyclerViewAdapter.ViewHolder>() {
 
     inner class ViewHolder(val mView: View) : RecyclerView.ViewHolder(mView){
         val name = mView.findViewById<TextView>(R.id.meal_name_view)
@@ -29,15 +30,15 @@ class MealRecyclerViewAdapter(private val mMealList: ArrayList<Meal>) : Recycler
         return ViewHolder(view)    }
 
     override fun onBindViewHolder(holder: MealRecyclerViewAdapter.ViewHolder, position: Int) {
-        val item = mMealList[position]
-        holder.name.text = item.strMeal
-        holder.area.text = item.strArea
-        holder.category.text = item.strCategory
+        val item = mMealList.value?.get(position)
+        holder.name.text = item?.strMeal
+        holder.area.text = item?.strArea
+        holder.category.text = item?.strCategory
 
         Glide.with(holder.mView.context) // image loading with glide
-            .load(item.strMealThumb) //todo: other image during loading
+            .load(item?.strMealThumb) //todo: other image during loading
             .into(holder.image)
     }
 
-    override fun getItemCount() = mMealList.size
+    override fun getItemCount() = mMealList.value!!.size
 }

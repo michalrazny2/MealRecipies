@@ -1,23 +1,27 @@
 package com.example.mealrecipies.ui.home
 
+import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.mealrecipies.BaseViewModel
 import com.example.mealrecipies.models.Meal
+import com.example.mealrecipies.repositories.MealRepository
 
-class HomeViewModel : BaseViewModel() {
+class HomeViewModel(application: Application) : BaseViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is home Fragment"
+    var localMealList : LiveData<List<Meal>>
+    private val mealRepository : MealRepository = MealRepository.getInstance(application.applicationContext)
+
+    init{
+        this.localMealList = this.mealRepository.meals
     }
-    val text: LiveData<String> = _text
 
-    // todo: mealList to be changed on LiveData
-    val localMealList: ArrayList<Meal> = arrayListOf(
-        Meal(), //naive data
-        Meal("1", "Italia", "Vege"),
-        Meal("2", "Italia", "Meat"),
-        Meal()
-    )
+    // todo: mealList to be changed on LiveData, content taken from Room database
+//    val localMealList: ArrayList<Meal> = arrayListOf(
+//        Meal("1", "Italia", "Vege"),
+//        Meal("2", "Italia", "Meat"),
+//        Meal(), //naive data
+//        Meal()
+//    )
 }

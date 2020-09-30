@@ -23,6 +23,7 @@ import retrofit2.Retrofit
 class DashboardFragment : Fragment() {
 
     private lateinit var dashboardViewModel: DashboardViewModel
+    private lateinit var mealAdapter : MealRecyclerViewAdapter
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -31,6 +32,8 @@ class DashboardFragment : Fragment() {
     ): View? {
         dashboardViewModel =
                 ViewModelProviders.of(this).get(DashboardViewModel::class.java)
+        mealAdapter = MealRecyclerViewAdapter(dashboardViewModel.searchMealList)
+
         val root = inflater.inflate(R.layout.fragment_dashboard, container, false)
         return root
     }
@@ -47,6 +50,6 @@ class DashboardFragment : Fragment() {
 
     private fun setUpRecyclerView() {
         recyclerViewSearch.layoutManager = LinearLayoutManager(context)
-        recyclerViewSearch.adapter = MealRecyclerViewAdapter(dashboardViewModel.mealList)
+        recyclerViewSearch.adapter = mealAdapter
     }
 }
