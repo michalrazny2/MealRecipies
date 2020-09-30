@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">MealRecipies</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+
+    <string name="BASE_URL">https://www.themealdb.com/api/json/v1/1/</string>
+
+</resources>
