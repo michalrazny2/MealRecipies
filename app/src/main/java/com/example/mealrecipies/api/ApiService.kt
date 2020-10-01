@@ -11,11 +11,13 @@ interface ApiService {
 
     // Get meals by name
     @GET("search.php?s={mealName}")
-    fun getMealsByName() : Call<Meal> // todo: pozniej Observable pewnie
+    fun getMealsByName(name : String) : Call<Meal> // todo: pozniej Observable pewnie, zamiana na List<Meal> ??
+    // todo: @Query + jakas tam litera
+
 
     // Get meals by first letter
     @GET("search.php?f={letter}")
-    fun getMealsByFirstLetter() : Call<Meal>
+    fun getMealsByFirstLetter(letter : String) : Call<List<Meal>> // todo: @Query + jakas tam litera
 
     // Get meals by ID
     @GET("lookup.php")     //?i={id}
