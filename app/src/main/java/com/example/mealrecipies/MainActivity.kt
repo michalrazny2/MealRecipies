@@ -37,40 +37,35 @@ class MainActivity : AppCompatActivity() {
         val db = AppDatabase.getAppDataBase(context = this)
         val mealDao = db?.mealDao()
 
-        Thread{
-            val meal1 = Meal("1", "Italia", "Vege")
-            val meal2 = Meal("2", "Italia", "Meat")
+//        Thread{
+//            val meal1 = Meal("1", "Italia", "Vege")
+//            val meal2 = Meal("2", "Italia", "Meat")
+//
+//            mealDao?.saveMeal(meal1)
+//            mealDao?.saveMeal(meal2)
+//        }.start()
 
-            mealDao?.saveMeal(meal1)
-            mealDao?.saveMeal(meal2)
-        }.start()
-
-
-        val retrofit = Retrofit.Builder()
-            .baseUrl(resources.getString(R.string.BASE_URL))
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-
-        val apiService = retrofit.create(ApiService::class.java)
-
-        val call : Call<Meal> = apiService.getMealsById("52772")
-
-        call.enqueue(object: Callback<Meal>{
-            override fun onResponse(call: Call<Meal>, response: Response<Meal>) {
-                val meal = response.body()
-
-                Log.i("TAG", meal?.strArea.toString())
-            }
-
-            override fun onFailure(call: Call<Meal>, t: Throwable) {
-                TODO("Not yet implemented")
-            }
-
-        })
+//        val retrofit = Retrofit.Builder()
+//            .baseUrl(resources.getString(R.string.BASE_URL))
+//            .addConverterFactory(GsonConverterFactory.create())
+//            .build()
+//
+//        val apiService = retrofit.create(ApiService::class.java)
+//
+//        val call : Call<List<Meal>> = apiService.getMealsById("52772")
+//
+//        call.enqueue(object: Callback<List<Meal>>{
+//            override fun onResponse(call: Call<List<Meal>>, response: Response<List<Meal>>) {
+//                val meal = response.body()
+//
+////                Log.i("TAG", meal[0].strArea.toString())
+//            }
+//
+//            override fun onFailure(call: Call<List<Meal>>, t: Throwable) {
+//                TODO("Not yet implemented")
+//            }
+//
+//        })
     }
 
-
-    companion object{
-
-    }
 }

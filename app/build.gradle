@@ -76,4 +76,7 @@ dependencies {
 
     // Fasterxml jackson
     implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.11.2'
+
+    // Database debugging
+    debugImplementation 'com.amitshekhar.android:debug-db:1.0.6'
 }

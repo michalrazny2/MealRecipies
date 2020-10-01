@@ -54,6 +54,8 @@ class DashboardFragment : Fragment() {
         super.onStop()
     }
 
+    // TODO: observers initializations <?>
+
     private fun setUpRecyclerView() {
         recyclerViewSearch.layoutManager = LinearLayoutManager(context)
         recyclerViewSearch.adapter = mealAdapter

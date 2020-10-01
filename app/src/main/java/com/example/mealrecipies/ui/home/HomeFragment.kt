@@ -46,6 +46,8 @@ class HomeFragment : Fragment() {
         super.onStop()
     }
 
+    // TODO: observers initialization <?>
+
     private fun setUpRecyclerView() {
         recyclerViewLocal.layoutManager = LinearLayoutManager(context)
         recyclerViewLocal.adapter = mealAdapter

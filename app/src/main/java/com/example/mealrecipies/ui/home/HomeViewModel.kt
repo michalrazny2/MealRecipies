@@ -15,7 +15,6 @@ class HomeViewModel(application: Application) : BaseViewModel() {
 
     init{
         this.localMealList = mealRepository.getMealLiveData()
-
     }
 
     fun getMealLiveData() = localMealList

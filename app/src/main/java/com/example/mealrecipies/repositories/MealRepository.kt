@@ -21,34 +21,49 @@ class MealRepository private constructor(val context: Context) {
     private val database: AppDatabase? = AppDatabase.INSTANCE
     private val executor = Executors.newSingleThreadExecutor()
 
-    private lateinit var oneMealCall : Call<Meal>
     private lateinit var listMealCall : Call<List<Meal>>
-
-    private val allLocalMeals: LiveData<List<Meal>>
-        get() = this.database!!.mealDao().getAllMeals()
 
     init{
         //todo: jakos wypadaloby wsadzic tu wartosci z lokalnej bazy danych:
         // czy napewno w Dao funkcja getAllMeals ma zwracać LiveData a nie liste?
-        localMeals = MutableLiveData<List<Meal>>()
+        val meal1 = Meal("3", "Germany", "Vege")
+        val meal2 = Meal("4", "Polonia", "Meat")
+        saveMeal(meal1)                                     // todo: zapisywanie w bazie danych cos nie hula za bardzo ;;
+        Log.i("SAVED_TO_DATABASE", meal1.toString())
+        saveMeal(meal2)
+        Log.i("SAVED_TO_DATABASE2", meal2.toString())
 
-        localMeals.value = listOf(
-            Meal("1", "Italia", "Vege"), //naive data
-            Meal("2", "Italia", "Meat"),
-            Meal(),
-            Meal())
+        localMeals = MutableLiveData<List<Meal>>(loadMeals().value)
+//        localMeals.postValue(listOf(
+//            Meal("3", "Italia", "Vege"), //naive data
+//            Meal("4", "Italia", "Meat")))
+
+//        localMeals.value = listOf(
+//            Meal("1", "Italia", "Vege"), //naive data
+//            Meal("2", "Italia", "Meat"),
+//            Meal(),
+//            Meal())
 
         remoteMeals = MutableLiveData<List<Meal>>()
 
         remoteMeals.value = listOf(
             Meal("1", "Germany", "Vege"), //naive data
             Meal("2", "Poland", "Meat"),
-            Meal(),
-            Meal())
+            Meal("3", "Poland", "Meat"),
+            Meal("4", "Poland", "Meat"))
+    }
+
+    fun loadMeals() : LiveData<List<Meal>>{ // TODO: this function should not be executed on mainThread
+        return database!!.mealDao().getAllMeals()
+//        executor.execute {  }
     }
 
     fun saveMeal(meal: Meal){
         executor.execute { database!!.mealDao().saveMeal(meal) }
+    }
+
+    fun deleteMeal(meal : Meal){
+        executor.execute { database!!.mealDao().deleteMeal(meal) }
     }
 
     fun getMealLiveData() = localMeals
@@ -56,13 +71,13 @@ class MealRepository private constructor(val context: Context) {
 
     // Retrofit function calls
     fun getMealsName(name : String): MutableLiveData<List<Meal>>{
-        oneMealCall = ApiClient.getInstance().getApiService().getMealsByName(name)
-        oneMealCall.enqueue(object : Callback<Meal>{
-            override fun onResponse(call: Call<Meal>, response: Response<Meal>) {
-                remoteMeals.value = listOf(response.body()) // todo: cos slabo z null checkami
+        listMealCall = ApiClient.getInstance().getApiService().getMealsByName(name)
+        listMealCall.enqueue(object : Callback<List<Meal>>{
+            override fun onResponse(call: Call<List<Meal>>, response: Response<List<Meal>>) {
+                remoteMeals.value = response.body()
             }
 
-            override fun onFailure(call: Call<Meal>, t: Throwable) {
+            override fun onFailure(call: Call<List<Meal>>, t: Throwable) {
                 remoteMeals.value = emptyList()
                 Log.e("GET_MEAL_BY_ID", "Failed call")
             }
@@ -75,7 +90,7 @@ class MealRepository private constructor(val context: Context) {
         listMealCall = ApiClient.getInstance().getApiService().getMealsByFirstLetter(letter)
         listMealCall.enqueue(object : Callback<List<Meal>>{
             override fun onResponse(call: Call<List<Meal>>, response: Response<List<Meal>>) {
-                remoteMeals.value = listOf(response.body()) // todo: cos slabo z null checkami
+                remoteMeals.value = response.body()
             }
 
             override fun onFailure(call: Call<List<Meal>>, t: Throwable) {
@@ -88,13 +103,13 @@ class MealRepository private constructor(val context: Context) {
     }
 
     fun getMealsId(id : String): MutableLiveData<List<Meal>>{
-        oneMealCall = ApiClient.getInstance().getApiService().getMealsById(id)
-        oneMealCall.enqueue(object : Callback<Meal>{
-            override fun onResponse(call: Call<Meal>, response: Response<Meal>) {
-                remoteMeals.value = listOf(response.body()) // todo: cos slabo z null checkami
+        listMealCall = ApiClient.getInstance().getApiService().getMealsById(id)
+        listMealCall.enqueue(object : Callback<List<Meal>>{
+            override fun onResponse(call: Call<List<Meal>>, response: Response<List<Meal>>) {
+                remoteMeals.value = response.body()
             }
 
-            override fun onFailure(call: Call<Meal>, t: Throwable) {
+            override fun onFailure(call: Call<List<Meal>>, t: Throwable) {
                 remoteMeals.value = emptyList()
                 Log.e("GET_MEAL_BY_ID", "Failed call")
             }

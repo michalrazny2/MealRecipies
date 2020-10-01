@@ -15,7 +15,8 @@ class DashboardViewModel(application : Application) : BaseViewModel() {
 
     init{
         this.remoteMealList = mealRepository.getRemoteLiveData()
-
     }
+
+    // TODO: methods to send api requests from viewModel layer
 
 }
