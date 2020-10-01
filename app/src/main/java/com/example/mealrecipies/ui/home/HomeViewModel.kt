@@ -14,11 +14,13 @@ class HomeViewModel(application: Application) : BaseViewModel() {
     private val mealRepository : MealRepository = MealRepository.getInstance(application.applicationContext)
 
     init{
-        this.localMealList = this.mealRepository.meals
+        this.localMealList = mealRepository.getMealLiveData()
+
     }
 
-    // todo: mealList to be changed on LiveData, content taken from Room database
-//    val localMealList: ArrayList<Meal> = arrayListOf(
+    fun getMealLiveData() = localMealList
+
+//    val localMealList: ArrayList<Meal> = listOf(
 //        Meal("1", "Italia", "Vege"),
 //        Meal("2", "Italia", "Meat"),
 //        Meal(), //naive data

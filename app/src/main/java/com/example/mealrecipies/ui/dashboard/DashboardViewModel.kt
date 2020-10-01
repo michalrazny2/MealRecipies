@@ -10,20 +10,12 @@ import com.example.mealrecipies.repositories.MealRepository
 
 class DashboardViewModel(application : Application) : BaseViewModel() {
 
-    var searchMealList : LiveData<List<Meal>>
+    var remoteMealList : LiveData<List<Meal>>
     private val mealRepository : MealRepository = MealRepository.getInstance(application.applicationContext)
 
     init{
-        this.searchMealList = this.mealRepository.meals
+        this.remoteMealList = mealRepository.getRemoteLiveData()
+
     }
-
-
-    // todo: mealList to be changed on LiveData
-    val mealList: ArrayList<Meal> = arrayListOf(Meal(), //naive data
-                                        Meal(),
-                                        Meal(),
-                                        Meal())
-
-
 
 }

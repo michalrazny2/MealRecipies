@@ -40,5 +40,5 @@ class MealRecyclerViewAdapter(private val mMealList: LiveData<List<Meal>>) : Rec
             .into(holder.image)
     }
 
-    override fun getItemCount() = mMealList.value!!.size
+    override fun getItemCount() = mMealList.value!!.size // null assertion
 }
