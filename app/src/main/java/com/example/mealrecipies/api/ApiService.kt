@@ -17,11 +17,11 @@ interface ApiService {
 
     // Get meals by first letter
     @GET("search.php")
-    fun getMealsByFirstLetter(@Query("f") letter : String) : Call<List<Meal>>
+    fun getMealsByFirstLetter(@Query("f") letter : String) : Call<MealApiResponse>
 
     // Get meals by ID
     @GET("lookup.php")     //?i={id}
-    fun getMealsById(@Query("i") id: String) : Call<List<Meal>>
+    fun getMealsById(@Query("i") id: String) : Call<MealApiResponse>
 
     // Get meals by Categories
 }
