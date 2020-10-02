@@ -10,14 +10,14 @@ import retrofit2.http.Query
 interface ApiService {
 
     // Get meals by name
-    @GET("search.php?s={mealName}")
-    fun getMealsByName(name : String) : Call<List<Meal>> // todo: pozniej Observable pewnie, zamiana na List<Meal> ??
+    @GET("search.php")
+    fun getMealsByName(@Query("s") name : String) : Call<MealApiResponse>
     // todo: @Query + jakas tam litera
 
 
     // Get meals by first letter
-    @GET("search.php?f={letter}")
-    fun getMealsByFirstLetter(letter : String) : Call<List<Meal>> // todo: @Query + jakas tam litera
+    @GET("search.php")
+    fun getMealsByFirstLetter(@Query("f") letter : String) : Call<List<Meal>>
 
     // Get meals by ID
     @GET("lookup.php")     //?i={id}

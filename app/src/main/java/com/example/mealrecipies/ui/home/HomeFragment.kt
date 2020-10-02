@@ -40,6 +40,7 @@ class HomeFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         setUpRecyclerView()
+        setUpObservers()
     }
 
     override fun onStop() {
@@ -47,6 +48,9 @@ class HomeFragment : Fragment() {
     }
 
     // TODO: observers initialization <?>
+    private fun setUpObservers() {
+        //TODO("Not yet implemented")
+    }
 
     private fun setUpRecyclerView() {
         recyclerViewLocal.layoutManager = LinearLayoutManager(context)

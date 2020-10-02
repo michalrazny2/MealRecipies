@@ -17,6 +17,17 @@ class DashboardViewModel(application : Application) : BaseViewModel() {
         this.remoteMealList = mealRepository.getRemoteLiveData()
     }
 
-    // TODO: methods to send api requests from viewModel layer
+    fun getMealById(id : String) : MutableLiveData<List<Meal>>{
+        return mealRepository.getMealsName(id)
+    }
+
+    fun getMealsByName(name : String) : MutableLiveData<List<Meal>>{
+        return mealRepository.getMealsName(name)
+    }
+
+    fun getMealsByLetter(letter: String) : MutableLiveData<List<Meal>>{
+        return mealRepository.getMealsName(letter)
+    }
+
 
 }

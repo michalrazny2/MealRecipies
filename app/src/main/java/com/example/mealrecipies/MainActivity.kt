@@ -2,24 +2,26 @@ package com.example.mealrecipies
 
 import android.os.Bundle
 import android.util.Log
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import androidx.room.Room
-import com.example.mealrecipies.api.ApiService
+import com.example.mealrecipies.api.ApiClient
 import com.example.mealrecipies.database.AppDatabase
 import com.example.mealrecipies.models.Meal
 import com.example.mealrecipies.models.MealApiResponse
+import com.example.mealrecipies.repositories.MealRepository
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.android.synthetic.main.fragment_home.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,8 +31,11 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment)
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
-        val appBarConfiguration = AppBarConfiguration(setOf(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications))
+        val appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications
+            )
+        )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
@@ -45,27 +50,19 @@ class MainActivity : AppCompatActivity() {
 //            mealDao?.saveMeal(meal2)
 //        }.start()
 
+//        val httpClient = OkHttpClient
+//            .Builder()
+//            .addInterceptor(HttpLoggingInterceptor()
+//                .setLevel(HttpLoggingInterceptor.Level.BODY))
+//            .build()
+//
 //        val retrofit = Retrofit.Builder()
 //            .baseUrl(resources.getString(R.string.BASE_URL))
 //            .addConverterFactory(GsonConverterFactory.create())
+////            .client(httpClient)
 //            .build()
-//
-//        val apiService = retrofit.create(ApiService::class.java)
-//
-//        val call : Call<List<Meal>> = apiService.getMealsById("52772")
-//
-//        call.enqueue(object: Callback<List<Meal>>{
-//            override fun onResponse(call: Call<List<Meal>>, response: Response<List<Meal>>) {
-//                val meal = response.body()
-//
-////                Log.i("TAG", meal[0].strArea.toString())
-//            }
-//
-//            override fun onFailure(call: Call<List<Meal>>, t: Throwable) {
-//                TODO("Not yet implemented")
-//            }
-//
-//        })
+
+
     }
 
 }
