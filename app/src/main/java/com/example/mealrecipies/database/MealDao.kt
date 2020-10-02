@@ -9,7 +9,7 @@ import com.example.mealrecipies.models.Meal
 interface MealDao {
 
     @Query("SELECT * FROM meals")
-    fun getAllMeals(): LiveData<List<Meal>>
+    fun getAllMeals(): List<Meal>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun saveMeal(meal : Meal)

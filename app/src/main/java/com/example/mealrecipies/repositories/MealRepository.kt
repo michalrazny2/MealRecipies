@@ -15,7 +15,7 @@ import java.util.concurrent.Executors
 
 class MealRepository private constructor(val context: Context) {
 
-    var localMeals: MutableLiveData<List<Meal>>
+    var localMeals: MutableLiveData<List<Meal>> = MutableLiveData(listOf())
     var remoteMeals: MutableLiveData<List<Meal>>
 
     private val database: AppDatabase? = AppDatabase.INSTANCE
@@ -24,25 +24,18 @@ class MealRepository private constructor(val context: Context) {
     private lateinit var listMealCall : Call<List<Meal>>
 
     init{
-        //todo: jakos wypadaloby wsadzic tu wartosci z lokalnej bazy danych:
-        // czy napewno w Dao funkcja getAllMeals ma zwracać LiveData a nie liste?
+        // todo: ponizszy kod do wywalenia w dalszych wersjach:
         val meal1 = Meal("3", "Germany", "Vege")
         val meal2 = Meal("4", "Polonia", "Meat")
-        saveMeal(meal1)                                     // todo: zapisywanie w bazie danych cos nie hula za bardzo ;;
-        Log.i("SAVED_TO_DATABASE", meal1.toString())
+        saveMeal(meal1)
+        Log.i("SAVED_TO_DATABASE", meal1.idMeal.toString())
         saveMeal(meal2)
-        Log.i("SAVED_TO_DATABASE2", meal2.toString())
+        Log.i("SAVED_TO_DATABASE2", meal2.idMeal.toString())
 
-        localMeals = MutableLiveData<List<Meal>>(loadMeals().value)
-//        localMeals.postValue(listOf(
-//            Meal("3", "Italia", "Vege"), //naive data
-//            Meal("4", "Italia", "Meat")))
-
-//        localMeals.value = listOf(
-//            Meal("1", "Italia", "Vege"), //naive data
-//            Meal("2", "Italia", "Meat"),
-//            Meal(),
-//            Meal())
+        executor.execute {
+            localMeals = loadMeals()
+            Log.i("LOCAL_MEALS_LOADED", localMeals.value.toString())
+        }
 
         remoteMeals = MutableLiveData<List<Meal>>()
 
@@ -53,17 +46,18 @@ class MealRepository private constructor(val context: Context) {
             Meal("4", "Poland", "Meat"))
     }
 
-    fun loadMeals() : LiveData<List<Meal>>{ // TODO: this function should not be executed on mainThread
-        return database!!.mealDao().getAllMeals()
-//        executor.execute {  }
+    fun loadMeals() : MutableLiveData<List<Meal>>{ // TODO: this function should not be executed on mainThread
+        var list : List<Meal> = listOf()
+        list = database!!.mealDao().getAllMeals()
+        return MutableLiveData(list)
     }
 
     fun saveMeal(meal: Meal){
-        executor.execute { database!!.mealDao().saveMeal(meal) }
+        executor.execute { database?.mealDao()?.saveMeal(meal) }
     }
 
     fun deleteMeal(meal : Meal){
-        executor.execute { database!!.mealDao().deleteMeal(meal) }
+        executor.execute { database?.mealDao()?.deleteMeal(meal) }
     }
 
     fun getMealLiveData() = localMeals
