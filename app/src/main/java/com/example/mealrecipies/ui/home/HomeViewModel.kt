@@ -19,6 +19,11 @@ class HomeViewModel(application: Application) : BaseViewModel() {
 
     fun getMealLiveData() = localMealList
 
+    // Todo: initialization of observers- observing mealRepository.remoteMealList z this.remoteMealList
+    fun setUpObserversViewModel(){
+
+    }
+
 //    val localMealList: ArrayList<Meal> = listOf(
 //        Meal("1", "Italia", "Vege"),
 //        Meal("2", "Italia", "Meat"),

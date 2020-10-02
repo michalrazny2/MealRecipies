@@ -54,14 +54,14 @@ class DashboardFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         setUpRecyclerView()
-        setUpObservers()
+        setUpObserversView()
     }
 
     override fun onStop() {
         super.onStop()
     }
 
-    private fun setUpObservers() {
+    private fun setUpObserversView() {
         // obserwowanie zmiany tekstu na searchView, todo: nie dziala, wywala Throwable w subsribe
         searchView.queryTextChanges().subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -80,6 +80,8 @@ class DashboardFragment : Fragment() {
 
 
         // obserwowanie kliknięcia na item recyclerView?
+
+        // Todo: observiing remoteMealList changes in dashboardViewModel
 
 
     }

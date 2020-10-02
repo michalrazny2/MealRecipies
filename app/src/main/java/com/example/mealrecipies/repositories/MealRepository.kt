@@ -32,7 +32,7 @@ class MealRepository private constructor(val context: Context) {
         Log.i("SAVED_TO_DATABASE", meal1.idMeal.toString())
         saveMeal(meal2)
         Log.i("SAVED_TO_DATABASE2", meal2.idMeal.toString())
-        //
+        //////
 
         executor.execute {
             localMeals = loadMeals()
@@ -68,6 +68,12 @@ class MealRepository private constructor(val context: Context) {
             }
 
         })
+        ////
+    }
+
+    fun databaseObserversInitialization(){
+        // Todo: Setting observers for local database
+        // update of localMealList when local database changes
     }
 
     fun loadMeals() : MutableLiveData<List<Meal>>{
@@ -101,7 +107,6 @@ class MealRepository private constructor(val context: Context) {
                 Log.e("GET_MEAL_BY_ID", "Failed call")
             }
         })
-
         return remoteMeals
     }
 
@@ -118,7 +123,6 @@ class MealRepository private constructor(val context: Context) {
                 Log.e("GET_MEAL_BY_ID", "Failed call")
             }
         })
-
         return remoteMeals
     }
 

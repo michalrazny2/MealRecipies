@@ -23,5 +23,4 @@ interface ApiService {
     @GET("lookup.php")     //?i={id}
     fun getMealsById(@Query("i") id: String) : Call<MealApiResponse>
 
-    // Get meals by Categories
 }

@@ -1,8 +1,10 @@
 package com.example.mealrecipies.ui.dashboard
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import com.example.mealrecipies.BaseViewModel
 import com.example.mealrecipies.models.Meal
@@ -15,6 +17,15 @@ class DashboardViewModel(application : Application) : BaseViewModel() {
 
     init{
         this.remoteMealList = mealRepository.getRemoteLiveData()
+    }
+
+    // Todo: initialization of observers- observing mealRepository.remoteMealList z this.remoteMealList
+    fun setUpObserversViewModel(){
+        mealRepository.remoteMeals.observeForever(Observer{// todo: lifecycle owner zamiast this?
+            Log.i("REMOTE_MEALS_REPOSITORY" , "Meals changed")
+            // todo: zmiana listy przechowywanej w LiveData
+        })
+
     }
 
     fun getMealById(id : String) : MutableLiveData<List<Meal>>{
