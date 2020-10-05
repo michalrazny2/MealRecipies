@@ -8,42 +8,47 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         app:layout_constraintBottom_toBottomOf="@+id/meal_name_view"
         app:layout_constraintTop_toBottomOf="@+id/meal_name_view">
 
         <TextView
             android:id="@+id/area_name_view"
-            android:layout_width="150dp"
-            android:layout_height="0dp"
+            android:layout_width="391dp"
+            android:layout_height="50dp"
+            android:layout_marginBottom="2dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/category_name_view"
-            app:layout_constraintTop_toBottomOf="@+id/meal_name_view" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/meal_name_view"
+            app:layout_constraintTop_toBottomOf="@+id/category_name_view" />
 
         <ImageView
             android:id="@+id/meal_image"
-            android:layout_width="0dp"
-            android:layout_height="100dp"
-            android:layout_marginEnd="152dp"
-            app:layout_constraintEnd_toStartOf="@+id/category_name_view"
+            android:layout_width="250dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="3dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/meal_name_view"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/meal_name_view"
-            android:layout_width="279dp"
-            android:layout_height="48dp"
-            app:layout_constraintBottom_toTopOf="@+id/area_name_view"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_width="782dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="249dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/category_name_view" />
 
         <TextView
             android:id="@+id/category_name_view"
-            android:layout_width="0dp"
+            android:layout_width="1185dp"
             android:layout_height="50dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/area_name_view"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/meal_image" />
+            app:layout_constraintStart_toEndOf="@+id/meal_image"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

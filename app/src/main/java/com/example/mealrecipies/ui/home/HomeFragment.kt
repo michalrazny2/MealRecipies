@@ -30,7 +30,7 @@ class HomeFragment : Fragment() {
         homeViewModel = ViewModelProvider(this, HomeViewModelFactory(this.requireActivity().application))
             .get(HomeViewModel::class.java)
 
-        mealAdapter = MealRecyclerViewAdapter(homeViewModel.getMealLiveData())
+        mealAdapter = MealRecyclerViewAdapter(homeViewModel.localMealList)
 
         val root = inflater.inflate(R.layout.fragment_home, container, false)
         return root
@@ -50,6 +50,10 @@ class HomeFragment : Fragment() {
     // TODO: observers initialization <?>
     private fun setUpObserversView() {
         // Todo: observing homeViewModel.localMealList from recyclerView
+        homeViewModel.localMealList.observe(viewLifecycleOwner , Observer{
+            mealAdapter.notifyDataSetChanged() // todo: setData?
+        })
+
     }
 
     private fun setUpRecyclerView() {

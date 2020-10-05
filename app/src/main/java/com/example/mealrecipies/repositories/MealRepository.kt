@@ -4,11 +4,14 @@ import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import com.example.mealrecipies.api.ApiClient
 import com.example.mealrecipies.database.AppDatabase
 import com.example.mealrecipies.database.MealDao
 import com.example.mealrecipies.models.Meal
 import com.example.mealrecipies.models.MealApiResponse
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -16,11 +19,13 @@ import java.util.concurrent.Executors
 
 class MealRepository private constructor(val context: Context) {
 
-    var localMeals: MutableLiveData<List<Meal>> = MutableLiveData(listOf())
-    var remoteMeals: MutableLiveData<List<Meal>>
+    var localMeals: MutableLiveData<List<Meal>>
+    var remoteMeals: MutableLiveData<List<Meal>> // todo: btw LiveData in repository is Anti-pattern
 
-    private val database: AppDatabase? = AppDatabase.INSTANCE
+    val database: AppDatabase? = AppDatabase.INSTANCE
     private val executor = Executors.newSingleThreadExecutor()
+
+    private val mealDao : MealDao? = AppDatabase.getAppDataBase(context)?.mealDao()
 
     private lateinit var listMealCall : Call<MealApiResponse>
 
@@ -34,12 +39,13 @@ class MealRepository private constructor(val context: Context) {
         Log.i("SAVED_TO_DATABASE2", meal2.idMeal.toString())
         //////
 
-        executor.execute {
+        GlobalScope.launch {
             localMeals = loadMeals()
             Log.i("LOCAL_MEALS_LOADED", localMeals.value.toString())
         }
 
         remoteMeals = MutableLiveData<List<Meal>>()
+        localMeals = MutableLiveData<List<Meal>>()
 
         // Todo: Naive remote data to be deleted later on
         remoteMeals.value = listOf(
@@ -47,6 +53,13 @@ class MealRepository private constructor(val context: Context) {
             Meal("2", "Poland", "Meat"),
             Meal("3", "Poland", "Meat"),
             Meal("4", "Poland", "Meat"))
+
+        localMeals.value = listOf(
+            Meal("3", "Germany", "Vege"),
+            Meal("5", "Germany", "Vege"),
+            Meal("4", "Germany", "Vege"),
+            Meal("6", "Germany", "Vege")
+        )
 
         val apiClient = ApiClient()
 
@@ -68,16 +81,22 @@ class MealRepository private constructor(val context: Context) {
             }
 
         })
+
         ////
     }
 
     fun databaseObserversInitialization(){
         // Todo: Setting observers for local database
         // update of localMealList when local database changes
+        localMeals.observe(database, Observer{
+
+        })
     }
 
-    fun loadMeals() : MutableLiveData<List<Meal>>{
-        var list : List<Meal> = listOf()
+
+
+    suspend fun loadMeals() : MutableLiveData<List<Meal>>{ // todo: jak jest metoda getData
+        var list : List<Meal> = listOf()     // to to chyba nie potrzebne
         list = database!!.mealDao().getAllMeals()
         return MutableLiveData(list)
     }
@@ -141,6 +160,10 @@ class MealRepository private constructor(val context: Context) {
         })
         return remoteMeals
     }
+
+//    fun getData(): LiveData<List<Meal>> {
+//        return mealDao!!.getAllMeals() // non-null asserted
+//    }
 
 
     companion object {
