@@ -101,11 +101,11 @@ class MealRepository private constructor(val context: Context) {
     }
 
     fun saveMeal(meal: Meal){
-        executor.execute { database?.mealDao()?.saveMeal(meal) }
+        GlobalScope.launch { database?.mealDao()?.saveMeal(meal) }
     }
 
     fun deleteMeal(meal : Meal){
-        executor.execute { database?.mealDao()?.deleteMeal(meal) }
+        GlobalScope.launch { database?.mealDao()?.deleteMeal(meal) }
     }
 
     fun getMealLiveData() = localMeals
