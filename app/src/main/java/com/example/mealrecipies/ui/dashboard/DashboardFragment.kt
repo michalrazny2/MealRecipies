@@ -17,6 +17,7 @@ import com.example.mealrecipies.HomeViewModelFactory
 import com.example.mealrecipies.R
 import com.example.mealrecipies.adapter.MealRecyclerViewAdapter
 import com.example.mealrecipies.api.ApiService
+import com.example.mealrecipies.models.Meal
 import com.example.mealrecipies.models.MealApiResponse
 import com.example.mealrecipies.ui.home.HomeViewModel
 import com.jakewharton.rxbinding4.view.clicks
@@ -55,6 +56,12 @@ class DashboardFragment : Fragment() {
 
         setUpRecyclerView()
         setUpObserversView()
+
+        dashboardViewModel.mealRepository.remoteMeals.value =
+            listOf(
+                Meal("1", "wow", "wow"),
+                Meal("2", "wow", "wow")
+            ) // todo: just testing
     }
 
     override fun onStop() {
@@ -62,27 +69,23 @@ class DashboardFragment : Fragment() {
     }
 
     private fun setUpObserversView() {
-        // obserwowanie zmiany tekstu na searchView, todo: nie dziala, wywala Throwable w subsribe
-        searchView.queryTextChanges().subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .debounce(300, TimeUnit.MILLISECONDS)
+        // obserwowanie zmiany tekstu na searchView
+        searchView.queryTextChanges()
+            .observeOn(AndroidSchedulers.mainThread()) // todo: add some delay, I guess it crushes sometimes
             .subscribe(object : Consumer<CharSequence> {
                 override fun accept(t: CharSequence?) {
                     dashboardViewModel.getMealsByName(t.toString())
                     Log.i("CALL_MADE", "queryTextChanges")
                 }
-            }, object : Consumer<Throwable>{
-                override fun accept(t: Throwable?) {
-                    Log.e("OBSERVER_SET_UP", "Last log went wrong")
-                }
-
             })
 
+        dashboardViewModel.remoteMealList.observe(viewLifecycleOwner, Observer {
+            mealAdapter.notifyDataSetChanged() // todo: Strange thing, works with api calls, does not work with normal value change <?>
+        })
 
-        // obserwowanie kliknięcia na item recyclerView?
-
-        // Todo: observiing remoteMealList changes in dashboardViewModel
-
+        // Todo: Observing recyclerView clicks
+//        recyclerViewSearch.clicks().observeOn(AndroidSchedulers.mainThread())
+//            .subscribe()
 
     }
 

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
@@ -13,6 +14,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mealrecipies.HomeViewModelFactory
 import com.example.mealrecipies.R
 import com.example.mealrecipies.adapter.MealRecyclerViewAdapter
+import com.example.mealrecipies.models.Meal
+import com.jakewharton.rxbinding4.view.clicks
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.fragment_home.*
 
 
@@ -41,6 +45,10 @@ class HomeFragment : Fragment() {
 
         setUpRecyclerView()
         setUpObserversView()
+
+        homeViewModel.mealRepository.localMeals.value =
+            listOf(Meal("1", "wow", "wow"),
+                Meal("2", "wow", "wow")) // todo: just testing
     }
 
     override fun onStop() {
@@ -49,10 +57,13 @@ class HomeFragment : Fragment() {
 
     // TODO: observers initialization <?>
     private fun setUpObserversView() {
-        // Todo: observing homeViewModel.localMealList from recyclerView
         homeViewModel.localMealList.observe(viewLifecycleOwner , Observer{
-            mealAdapter.notifyDataSetChanged() // todo: setData?
+            mealAdapter.notifyDataSetChanged() // todo: niby coś robi, ale zwraca dwa puste miejsca
         })
+
+        // Todo: observing click on recyclerView item
+//        recyclerViewLocal.clicks().observeOn(AndroidSchedulers.mainThread())
+//            .subscribe()
 
     }
 

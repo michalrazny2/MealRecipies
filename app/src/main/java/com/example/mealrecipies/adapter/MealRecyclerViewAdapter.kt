@@ -10,6 +10,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.mealrecipies.R
 import com.example.mealrecipies.models.Meal
+import com.jakewharton.rxbinding4.view.clicks
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import kotlinx.android.synthetic.main.fragment_dashboard.*
 
 class MealRecyclerViewAdapter(private val mMealList: LiveData<List<Meal>>) : RecyclerView.Adapter<MealRecyclerViewAdapter.ViewHolder>() {
 
@@ -25,7 +28,7 @@ class MealRecyclerViewAdapter(private val mMealList: LiveData<List<Meal>>) : Rec
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): MealRecyclerViewAdapter.ViewHolder { //todo: czy ten layout napewno
+    ): MealRecyclerViewAdapter.ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.meal_item, parent, false)
         return ViewHolder(view)    }
 
@@ -38,6 +41,7 @@ class MealRecyclerViewAdapter(private val mMealList: LiveData<List<Meal>>) : Rec
         Glide.with(holder.mView.context) // image loading with glide
             .load(item?.strMealThumb) //todo: other image during loading
             .into(holder.image)
+
     }
 
     override fun getItemCount() = mMealList.value!!.size // null assertion

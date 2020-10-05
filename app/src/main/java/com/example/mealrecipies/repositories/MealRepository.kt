@@ -35,8 +35,7 @@ class MealRepository private constructor(val context: Context) {
         val meal2 = Meal("4", "Polonia", "Meat")
         saveMeal(meal1)
         Log.i("SAVED_TO_DATABASE", meal1.idMeal.toString())
-        saveMeal(meal2)
-        Log.i("SAVED_TO_DATABASE2", meal2.idMeal.toString())
+
         //////
 
         GlobalScope.launch {
@@ -50,9 +49,9 @@ class MealRepository private constructor(val context: Context) {
         // Todo: Naive remote data to be deleted later on
         remoteMeals.value = listOf(
             Meal("1", "Germany", "Vege"), //naive data
-            Meal("2", "Poland", "Meat"),
-            Meal("3", "Poland", "Meat"),
-            Meal("4", "Poland", "Meat"))
+            Meal("2", "Poland", "Vege"),
+            Meal("3", "Poland", "Vege"),
+            Meal("4", "Poland", "Vege"))
 
         localMeals.value = listOf(
             Meal("3", "Germany", "Vege"),
@@ -79,24 +78,24 @@ class MealRepository private constructor(val context: Context) {
             override fun onFailure(call: Call<MealApiResponse>, t: Throwable) {
                 Log.e("CALL_MAIN_ACTIVITY", "Call failed")
             }
-
         })
-
         ////
+        databaseObserversInitialization()
+        // Todo: Just checking if observer works correctly (To be deleted):
+        saveMeal(meal2)
+        Log.i("SAVED_TO_DATABASE2", meal2.idMeal.toString())
     }
 
     fun databaseObserversInitialization(){
-        // Todo: Setting observers for local database
         // update of localMealList when local database changes
-        localMeals.observe(database, Observer{
+        database!!.mealDao().getAllMeals1().observeForever{
+            Observer<MutableLiveData<List<Meal>>>{
+                localMeals = it }}
 
-        })
     }
 
-
-
-    suspend fun loadMeals() : MutableLiveData<List<Meal>>{ // todo: jak jest metoda getData
-        var list : List<Meal> = listOf()     // to to chyba nie potrzebne
+    suspend fun loadMeals() : MutableLiveData<List<Meal>>{
+        var list : List<Meal> = listOf()
         list = database!!.mealDao().getAllMeals()
         return MutableLiveData(list)
     }
@@ -160,11 +159,6 @@ class MealRepository private constructor(val context: Context) {
         })
         return remoteMeals
     }
-
-//    fun getData(): LiveData<List<Meal>> {
-//        return mealDao!!.getAllMeals() // non-null asserted
-//    }
-
 
     companion object {
 

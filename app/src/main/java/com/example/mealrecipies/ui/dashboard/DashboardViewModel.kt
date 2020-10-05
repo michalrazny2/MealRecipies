@@ -12,19 +12,22 @@ import com.example.mealrecipies.repositories.MealRepository
 
 class DashboardViewModel(application : Application) : BaseViewModel() {
 
+    val mealRepository : MealRepository = MealRepository.getInstance(application.applicationContext)
+
     var remoteMealList : LiveData<List<Meal>>
-    private val mealRepository : MealRepository = MealRepository.getInstance(application.applicationContext)
+        get() = mealRepository.remoteMeals
 
     init{
         this.remoteMealList = mealRepository.getRemoteLiveData()
+        setUpObserversViewModel()
     }
 
     // Todo: initialization of observers- observing mealRepository.remoteMealList z this.remoteMealList
     fun setUpObserversViewModel(){
-        mealRepository.remoteMeals.observeForever(Observer{// todo: lifecycle owner zamiast this?
+        mealRepository.remoteMeals.observeForever{ Observer<LiveData<List<Meal>>>{
+            remoteMealList = it
             Log.i("REMOTE_MEALS_REPOSITORY" , "Meals changed")
-            // todo: zmiana listy przechowywanej w LiveData
-        })
+        }}
 
     }
 

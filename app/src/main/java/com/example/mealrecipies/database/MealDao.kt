@@ -13,7 +13,10 @@ interface MealDao {
 //    suspend fun getAllMeals(): List<Meal> // multiple value request, using flow
 
     @Query("SELECT * FROM meals")
-    suspend fun getAllMeals(): List<Meal> // not sure if this should be list or just Meal
+    suspend fun getAllMeals(): List<Meal> // not sure if this should be list or LiveData
+
+    @Query("SELECT * FROM meals")
+    fun getAllMeals1(): LiveData<List<Meal>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun saveMeal(meal : Meal)
