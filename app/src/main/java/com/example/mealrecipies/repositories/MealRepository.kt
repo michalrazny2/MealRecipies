@@ -31,8 +31,8 @@ class MealRepository private constructor(val context: Context) {
 
     init{
         // Todo: Naive local/database code to be deleted later on
-        val meal1 = Meal("3", "Germany", "Vege")
-        val meal2 = Meal("4", "Polonia", "Meat")
+        val meal1 = Meal("7", "Gerwry", "Vewrege")
+        val meal2 = Meal("8", "Powerria", "Mewerat")
         saveMeal(meal1)
         Log.i("SAVED_TO_DATABASE", meal1.idMeal.toString())
 
@@ -90,7 +90,9 @@ class MealRepository private constructor(val context: Context) {
         // update of localMealList when local database changes
         database!!.mealDao().getAllMeals1().observeForever{
             Observer<MutableLiveData<List<Meal>>>{
-                localMeals = it }}
+                localMeals = it
+            }
+        }
 
     }
 

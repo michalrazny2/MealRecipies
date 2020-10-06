@@ -1,5 +1,7 @@
 package com.example.mealrecipies.adapter
 
+import android.content.Intent
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,9 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.mealrecipies.R
 import com.example.mealrecipies.models.Meal
-import com.jakewharton.rxbinding4.view.clicks
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import kotlinx.android.synthetic.main.fragment_dashboard.*
+import com.example.mealrecipies.ui.recipe.RecipeActivity
 
 class MealRecyclerViewAdapter(private val mMealList: LiveData<List<Meal>>) : RecyclerView.Adapter<MealRecyclerViewAdapter.ViewHolder>() {
 
@@ -37,10 +37,18 @@ class MealRecyclerViewAdapter(private val mMealList: LiveData<List<Meal>>) : Rec
         holder.name.text = item?.strMeal
         holder.area.text = item?.strArea
         holder.category.text = item?.strCategory
+        holder.itemView.setOnClickListener {
+            // Starting the meal activity:
+            val intent = Intent(holder.image.context, RecipeActivity::class.java).apply{
+                putExtra("recipe", item)
+            }
+            holder.image.context.startActivity(intent)
+        }
 
         Glide.with(holder.mView.context) // image loading with glide
             .load(item?.strMealThumb) //todo: other image during loading
             .into(holder.image)
+
 
     }
 

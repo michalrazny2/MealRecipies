@@ -1,5 +1,6 @@
 package com.example.mealrecipies.ui.dashboard
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -57,11 +58,12 @@ class DashboardFragment : Fragment() {
         setUpRecyclerView()
         setUpObserversView()
 
+        // todo: just testing:
         dashboardViewModel.mealRepository.remoteMeals.value =
             listOf(
                 Meal("1", "wow", "wow"),
                 Meal("2", "wow", "wow")
-            ) // todo: just testing
+            )
     }
 
     override fun onStop() {
@@ -83,9 +85,7 @@ class DashboardFragment : Fragment() {
             mealAdapter.notifyDataSetChanged() // todo: Strange thing, works with api calls, does not work with normal value change <?>
         })
 
-        // Todo: Observing recyclerView clicks
-//        recyclerViewSearch.clicks().observeOn(AndroidSchedulers.mainThread())
-//            .subscribe()
+        // Todo: Observing recyclerView clicks ?
 
     }
 

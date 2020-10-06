@@ -46,9 +46,10 @@ class HomeFragment : Fragment() {
         setUpRecyclerView()
         setUpObserversView()
 
-        homeViewModel.mealRepository.localMeals.value =
-            listOf(Meal("1", "wow", "wow"),
-                Meal("2", "wow", "wow")) // todo: just testing
+
+        // todo: just testing:
+        homeViewModel.mealRepository.saveMeal(Meal("1", "wow", "wow"))
+
     }
 
     override fun onStop() {
@@ -71,4 +72,6 @@ class HomeFragment : Fragment() {
         recyclerViewLocal.layoutManager = LinearLayoutManager(context)
         recyclerViewLocal.adapter = mealAdapter
     }
+    
+
 }

@@ -5,5 +5,6 @@
     <string name="title_notifications">Notifications</string>
 
     <string name="BASE_URL">https://www.themealdb.com/api/json/v1/1/</string>
+    <string name="name">Name</string>
 
 </resources>
