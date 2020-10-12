@@ -15,7 +15,7 @@ Used technologies:
 - some very elementary usage of Kotlin Coroutines (together with Room calls)
 
 
-##TODO:
+## TODO:
 The mini-project needs some improvement:
 - dependency injection
 - the layout for now is soo underdeveloped (but this miniproject is not about practicing UI design)
