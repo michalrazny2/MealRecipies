@@ -19,7 +19,6 @@ class HomeViewModel(application: Application) : BaseViewModel() {
     val mealRepository : MealRepository = MealRepository.getInstance(application.applicationContext)
 
     init{
-//        this.localMealList = LiveData()
         this.localMealList = mealRepository.getMealLiveData()
 
         setUpObserversViewModel()

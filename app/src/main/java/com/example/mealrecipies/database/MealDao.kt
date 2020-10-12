@@ -19,7 +19,7 @@ interface MealDao {
     fun getAllMeals1(): LiveData<List<Meal>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun saveMeal(meal : Meal)
+    fun saveMeal(meal : Meal?)
 
     @Delete
     fun deleteMeal(meal : Meal)

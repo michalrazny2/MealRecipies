@@ -93,7 +93,6 @@ class MealRepository private constructor(val context: Context) {
                 localMeals = it
             }
         }
-
     }
 
     suspend fun loadMeals() : MutableLiveData<List<Meal>>{
@@ -102,7 +101,7 @@ class MealRepository private constructor(val context: Context) {
         return MutableLiveData(list)
     }
 
-    fun saveMeal(meal: Meal){
+    fun saveMeal(meal: Meal?){
         GlobalScope.launch { database?.mealDao()?.saveMeal(meal) }
     }
 

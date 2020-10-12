@@ -22,7 +22,6 @@ class DashboardViewModel(application : Application) : BaseViewModel() {
         setUpObserversViewModel()
     }
 
-    // Todo: initialization of observers- observing mealRepository.remoteMealList z this.remoteMealList
     fun setUpObserversViewModel(){
         mealRepository.remoteMeals.observeForever{ Observer<LiveData<List<Meal>>>{
             remoteMealList = it
