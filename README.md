@@ -12,7 +12,8 @@ Used technologies:
 - Retrofit (connection with mealDB API),
 - RxJava3,
 - MVVM architecture
-- some very elementary usage of Kotlin Coroutines (together with Room calls)
+- some very elementary usage of Kotlin Coroutines (together with Room calls),
+- Glide
 
 
 ## TODO:
