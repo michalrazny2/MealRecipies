@@ -35,7 +35,7 @@ class RecipeActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // While there is only one element
+        // While there is only one element, i dont think i have to call 'when'
         finish()
         return super.onOptionsItemSelected(item)
     }

@@ -15,11 +15,20 @@
         android:id="@+id/navigation_dashboard"
         android:name="com.example.mealrecipies.ui.dashboard.DashboardFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_dashboard" >
+        <action
+            android:id="@+id/action_navigation_dashboard_to_recipeActivity"
+            app:destination="@id/recipeActivity" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_notifications"
         android:name="com.example.mealrecipies.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
+    <activity
+        android:id="@+id/recipeActivity"
+        android:name="com.example.mealrecipies.ui.recipe.RecipeActivity"
+        android:label="activity_recipe"
+        tools:layout="@layout/activity_recipe" />
 </navigation>

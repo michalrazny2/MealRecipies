@@ -388,6 +388,8 @@ class Meal : Parcelable {
     }
 
     companion object {
+        // Without this Jvm field annotation the compiler throws BadParcelableException!
+        @JvmField
         val CREATOR: Parcelable.Creator<Meal?> = object : Parcelable.Creator<Meal?> {
             override fun createFromParcel(`in`: Parcel): Meal? {
                 return Meal(`in`)

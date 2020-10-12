@@ -1,5 +1,6 @@
 package com.example.mealrecipies.ui.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,12 +16,13 @@ import com.example.mealrecipies.HomeViewModelFactory
 import com.example.mealrecipies.R
 import com.example.mealrecipies.adapter.MealRecyclerViewAdapter
 import com.example.mealrecipies.models.Meal
+import com.example.mealrecipies.ui.recipe.RecipeActivity
 import com.jakewharton.rxbinding4.view.clicks
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.fragment_home.*
 
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), MealRecyclerViewAdapter.OnItemClicked {
 
     private lateinit var mealAdapter : MealRecyclerViewAdapter
     private lateinit var homeViewModel: HomeViewModel
@@ -34,7 +36,7 @@ class HomeFragment : Fragment() {
         homeViewModel = ViewModelProvider(this, HomeViewModelFactory(this.requireActivity().application))
             .get(HomeViewModel::class.java)
 
-        mealAdapter = MealRecyclerViewAdapter(homeViewModel.localMealList)
+        mealAdapter = MealRecyclerViewAdapter(homeViewModel.localMealList, this)
 
         val root = inflater.inflate(R.layout.fragment_home, container, false)
         return root
@@ -72,6 +74,12 @@ class HomeFragment : Fragment() {
         recyclerViewLocal.layoutManager = LinearLayoutManager(context)
         recyclerViewLocal.adapter = mealAdapter
     }
-    
+
+    override fun startActivity(item: Meal?) {
+        val intent = Intent(context, RecipeActivity::class.java)
+        intent.putExtra("meal", item)
+        context?.startActivity(intent)
+    }
+
 
 }

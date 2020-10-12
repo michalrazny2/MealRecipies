@@ -21,6 +21,7 @@ import com.example.mealrecipies.api.ApiService
 import com.example.mealrecipies.models.Meal
 import com.example.mealrecipies.models.MealApiResponse
 import com.example.mealrecipies.ui.home.HomeViewModel
+import com.example.mealrecipies.ui.recipe.RecipeActivity
 import com.jakewharton.rxbinding4.view.clicks
 import com.jakewharton.rxbinding4.widget.queryTextChanges
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -32,7 +33,7 @@ import retrofit2.Call
 import retrofit2.Retrofit
 import java.util.concurrent.TimeUnit
 
-class DashboardFragment : Fragment() {
+class DashboardFragment : Fragment(), MealRecyclerViewAdapter.OnItemClicked {
 
     private lateinit var dashboardViewModel: DashboardViewModel
     private lateinit var mealAdapter : MealRecyclerViewAdapter
@@ -46,7 +47,7 @@ class DashboardFragment : Fragment() {
         dashboardViewModel = ViewModelProvider(this, DashboardViewModelFactory(this.requireActivity().application))
             .get(DashboardViewModel::class.java)
 
-        mealAdapter = MealRecyclerViewAdapter(dashboardViewModel.remoteMealList)
+        mealAdapter = MealRecyclerViewAdapter(dashboardViewModel.remoteMealList, this)
 
         val root = inflater.inflate(R.layout.fragment_dashboard, container, false)
         return root
@@ -67,6 +68,7 @@ class DashboardFragment : Fragment() {
     }
 
     override fun onStop() {
+        // Todo: stop observers <?>
         super.onStop()
     }
 
@@ -92,5 +94,11 @@ class DashboardFragment : Fragment() {
     private fun setUpRecyclerView() {
         recyclerViewSearch.layoutManager = LinearLayoutManager(context)
         recyclerViewSearch.adapter = mealAdapter
+    }
+
+    override fun startActivity(item : Meal?) {
+        val intent = Intent(context, RecipeActivity::class.java)
+        intent.putExtra("meal", item)
+        context?.startActivity(intent)
     }
 }
