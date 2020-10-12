@@ -21,8 +21,8 @@ class RecipeActivity : AppCompatActivity() {
     }
 
     private fun viewInitialization() {
-        // Todo: setting values in textview etc.
-        val item = parentActivityIntent?.extras?.getParcelable<Meal>("recipe")
+        // Todo: setting values in textview etc., why tf the item is null
+        val item = intent.extras?.getParcelable<Meal>("meal")
         strMeal_View.text = item?.strMeal
         categoryName_view.text = item?.strArea
         strInstructions_view.text = item?.strInstructions
