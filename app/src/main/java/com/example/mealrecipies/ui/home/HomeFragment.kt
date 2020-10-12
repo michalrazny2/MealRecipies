@@ -48,7 +48,6 @@ class HomeFragment : Fragment(), MealRecyclerViewAdapter.OnItemClicked {
         setUpRecyclerView()
         setUpObserversView()
 
-
         // todo: just testing:
         homeViewModel.mealRepository.saveMeal(Meal("1", "wow", "wow"))
 
@@ -58,15 +57,10 @@ class HomeFragment : Fragment(), MealRecyclerViewAdapter.OnItemClicked {
         super.onStop()
     }
 
-    // TODO: observers initialization <?>
     private fun setUpObserversView() {
         homeViewModel.localMealList.observe(viewLifecycleOwner , Observer{
-            mealAdapter.notifyDataSetChanged() // todo: niby coś robi, ale zwraca dwa puste miejsca
+            mealAdapter.notifyDataSetChanged()
         })
-
-        // Todo: observing click on recyclerView item
-//        recyclerViewLocal.clicks().observeOn(AndroidSchedulers.mainThread())
-//            .subscribe()
 
     }
 
@@ -80,6 +74,5 @@ class HomeFragment : Fragment(), MealRecyclerViewAdapter.OnItemClicked {
         intent.putExtra("meal", item)
         context?.startActivity(intent)
     }
-
 
 }

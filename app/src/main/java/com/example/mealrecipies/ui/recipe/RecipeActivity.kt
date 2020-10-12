@@ -47,6 +47,7 @@ class RecipeActivity : AppCompatActivity() {
         meal = item // assigning value to my meal
 
         val saveButtonObservable = getSaveButtonObserver()
+        val deleteButtonObservable = getDeleteButtonObserver()
 
         saveButtonObservable // subsribing button clicks
             .subscribeOn(Schedulers.io())
@@ -54,14 +55,30 @@ class RecipeActivity : AppCompatActivity() {
             .observeOn(Schedulers.io())
             .subscribe { _ -> recipeViewModel.saveRecipe(item) }
 
+        deleteButtonObservable
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .observeOn(Schedulers.io())
+            .subscribe{ _ -> recipeViewModel.deleteRecipe(item)}
+
     }
 
-    private fun getSaveButtonObserver(): Observable<Meal> { //todo: metoda do uzupelnienia
+    private fun getSaveButtonObserver(): Observable<Meal> {
         return Observable.create { emmiter ->
             saveButton.setOnClickListener {
                 emmiter.onNext(this.meal) // Todo: not sure if this is the correct way it should be done
                 emmiter.setCancellable {
                     saveButton.setOnClickListener(null)
+                }}
+        }
+    }
+
+    private fun getDeleteButtonObserver(): Observable<Meal> {
+        return Observable.create { emmiter ->
+            saveButton.setOnClickListener {
+                emmiter.onNext(this.meal) // Todo: not sure if this is the correct way it should be done
+                emmiter.setCancellable {
+                    deleteButton.setOnClickListener(null)
                 }}
         }
     }

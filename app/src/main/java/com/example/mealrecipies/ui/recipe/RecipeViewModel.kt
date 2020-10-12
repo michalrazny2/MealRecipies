@@ -16,4 +16,9 @@ class RecipeViewModel(application: Application) : BaseViewModel() {
         mealRepository.saveMeal(meal)
     }
 
+    // Todo: the method not yet tested
+    fun deleteRecipe(meal: Meal?){
+        mealRepository.deleteMeal(meal)
+    }
+
 }

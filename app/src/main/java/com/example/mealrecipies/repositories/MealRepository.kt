@@ -90,7 +90,7 @@ class MealRepository private constructor(val context: Context) {
         // update of localMealList when local database changes
         database!!.mealDao().getAllMeals1().observeForever{
             Observer<MutableLiveData<List<Meal>>>{
-                localMeals = it
+                localMeals = it  // todo: this observer might not work because of usage of the getAllMeals1() method
             }
         }
     }
@@ -105,7 +105,7 @@ class MealRepository private constructor(val context: Context) {
         GlobalScope.launch { database?.mealDao()?.saveMeal(meal) }
     }
 
-    fun deleteMeal(meal : Meal){
+    fun deleteMeal(meal : Meal?){
         GlobalScope.launch { database?.mealDao()?.deleteMeal(meal) }
     }
 

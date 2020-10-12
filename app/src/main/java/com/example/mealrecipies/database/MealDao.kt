@@ -22,5 +22,8 @@ interface MealDao {
     fun saveMeal(meal : Meal?)
 
     @Delete
-    fun deleteMeal(meal : Meal)
+    fun deleteMeal(meal : Meal?)
+
+    // querying meal by id/name etc. might be useful when deleting
+
 }
